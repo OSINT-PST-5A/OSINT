@@ -12,7 +12,7 @@ Réalisé par PIGA Alexandre et KANAWATI Rayan
 
  * python3
 
-## Instalation 
+## Installation 
 
 	git clone https://github.com/OSINT-PST-5A/OSINT.git
 	cd OSINT
