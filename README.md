@@ -23,6 +23,6 @@ Réalisé par PIGA Alexandre et KANAWATI Rayan
 	python3 Osint.py 
 
 ## Information
- * Si vous voulez rajouter d'autre lien git au projet écrire git :	
+ * Si vous voulez rajouter d'autre lien git au projet :	
 
 		git submodule add "lien du github"
