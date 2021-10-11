@@ -26,3 +26,7 @@ Réalisé par PIGA Alexandre et KANAWATI Rayan
  * Si vous voulez rajouter d'autre lien git au projet :	
 
 		git submodule add "lien du github"
+		
+## Arborescence
+
+<img src="https://github.com/OSINT-PST-5A/OSINT/blob/Develops/Documentation/tree.txt" width="360" height="360" />
