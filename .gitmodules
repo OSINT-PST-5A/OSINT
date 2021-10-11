@@ -1,0 +1,12 @@
+[submodule "Pseudo/twint"]
+	path = Pseudo/twint
+	url = https://github.com/twintproject/twint.git
+[submodule "Pseudo/instagram-scraper"]
+	path = Pseudo/instagram-scraper
+	url = https://github.com/arc298/instagram-scraper.git
+[submodule "Pseudo/nexfil"]
+	path = Pseudo/nexfil
+	url = https://github.com/thewhiteh4t/nexfil.git
+[submodule "Pseudo/sherlock"]
+	path = Pseudo/sherlock
+	url = https://github.com/sherlock-project/sherlock.git
