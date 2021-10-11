@@ -29,4 +29,4 @@ Réalisé par PIGA Alexandre et KANAWATI Rayan
 		
 ## Arborescence
 
-<img src="https://github.com/OSINT-PST-5A/OSINT/blob/Develops/Documentation/tree.txt" width="360" height="360" />
+https://github.com/OSINT-PST-5A/OSINT/blob/Develops/Documentation/tree.html
