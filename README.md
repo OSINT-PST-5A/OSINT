@@ -25,4 +25,4 @@ Réalisé par PIGA Alexandre et KANAWATI Rayan
 ## Information
  * Si vous voulez rajouter d'autre lien git au projet écrire git :	
 
-		submodule add "lien du github"
+		git submodule add "lien du github"
