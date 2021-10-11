@@ -10,7 +10,7 @@ Réalisé par PIGA Alexandre et KANAWATI Rayan
 
 ## Prérequis
 
- * Avoir python3
+ * python3
 
 ## Instalation 
 
