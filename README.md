@@ -14,13 +14,15 @@ Réalisé par PIGA Alexandre et KANAWATI Rayan
 
 ## Instalation 
 
-	git clone https://github.com/OSINT-PST-5A/OSINT.git
-	python3 Setup.py 
+		git clone https://github.com/OSINT-PST-5A/OSINT.git
+		cd OSINT
+		python3 Setup.py 
 
 ## Lancer le projet
 
-	python3 Osint.py 
+		python3 Osint.py 
 
 ## Information
+ * Si vous voulez rajouter d'autre lien git au projet écrire git :	
 
- * Si vous voulez rajouter d'autre lien git au projet écrire git submodule add "lien du github"
+		submodule add "lien du github"
