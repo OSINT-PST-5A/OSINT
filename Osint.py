@@ -1,6 +1,7 @@
 import os
 
 def pseudoChoiced():
+	cwd = os.getcwd()
 	QueryPseudo=input("Choissisez un Pseudo : ")
 	os.chdir("Pseudo")
 	list = os.listdir();
@@ -12,25 +13,35 @@ def pseudoChoiced():
 	elif QueryApplication == "sherlock":
 		os.chdir(QueryApplication)
 		os.system('python3 sherlock.py ' + QueryPseudo + ' --timeout 10')
+		os.system('cd ../')
 	elif QueryApplication == "nexfil":		
 		os.system('python3 nexfil.py -u ' + QueryPseudo)
 	elif QueryApplication == "instagram-scraper":
 		os.system('instagram-scraper ' + QueryPseudo)
 
+	
 	QueryPseudo=input("Appuyer sur entrée pour retourné au menu")
+	os.chdir(cwd)
 	informationRetrieved()
 
 def emailChoiced():
+	cwd = os.getcwd()
 	print("2 Email")
 	print(os.listdir())
 	QueryPseudo=input("Appuyer sur entrée pour retourné au menu")
+	os.chdir(cwd)
 	informationRetrieved()
 
 
 def commentaireChoiced():
-	print("3 Commentaire")
+	cwd = os.getcwd()
+	os.chdir("Commentaire")
 	print(os.listdir())
+	QueryApplication=input("Choissisez votre application : ")
+	if QueryApplication == "popularInCity" or "popularInCity.py":
+		os.system('python3 popularInCity.py')
 	QueryPseudo=input("Appuyer sur entrée pour retourné au menu")
+	os.chdir(cwd)
 	informationRetrieved()
 
 def informationRetrieved():
