@@ -6,13 +6,13 @@
 ## Description
 
 Application réalisée en python ayant pour but de faire une plateforme d'OSINT réalisé dans le cadre d'un projet scolaire à l'ESIEA encadré par Monsieur HAIDAR
-Réalisé par PIGA Alexandre et KANAWATI Rayan
+réalisé par PIGA Alexandre et KANAWATI Rayan
 
 ## Prérequis
 
  * python3
 
-## Instalation 
+## Installation 
 
 	git clone https://github.com/OSINT-PST-5A/OSINT.git
 	cd OSINT
