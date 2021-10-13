@@ -13,3 +13,6 @@
 [submodule "Email/holehe"]
 	path = Email/holehe
 	url = https://github.com/megadose/holehe.git
+[submodule "Email/h8mail"]
+	path = Email/h8mail
+	url = https://github.com/khast3x/h8mail.git
