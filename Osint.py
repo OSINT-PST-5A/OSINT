@@ -20,15 +20,26 @@ def pseudoChoiced():
 		os.system('instagram-scraper ' + QueryPseudo)
 
 	
-	QueryPseudo=input("Appuyer sur entrée pour retourné au menu")
+	Query=input("Appuyer sur entrée pour retourné au menu")
 	os.chdir(cwd)
 	informationRetrieved()
 
 def emailChoiced():
 	cwd = os.getcwd()
-	print("2 Email")
-	print(os.listdir())
-	QueryPseudo=input("Appuyer sur entrée pour retourné au menu")
+	QueryEmail=input("Choissisez un Email : ")
+	os.chdir("Email")
+	list = os.listdir();
+	print(list)
+	QueryApplication=input("Choissisez votre application : ")
+	if QueryApplication == "holehe":
+		os.chdir(QueryApplication)
+		os.system('holehe ' + QueryEmail)
+	if QueryApplication == "h8mail":
+		os.chdir(QueryApplication)
+		os.system('h8mail -t ' + QueryEmail)
+
+
+	Query=input("Appuyer sur entrée pour retourné au menu")
 	os.chdir(cwd)
 	informationRetrieved()
 
@@ -40,7 +51,7 @@ def commentaireChoiced():
 	QueryApplication=input("Choissisez votre application : ")
 	if QueryApplication == "popularInCity" or "popularInCity.py":
 		os.system('python3 popularInCity.py')
-	QueryPseudo=input("Appuyer sur entrée pour retourné au menu")
+	Query=input("Appuyer sur entrée pour retourné au menu")
 	os.chdir(cwd)
 	informationRetrieved()
 
