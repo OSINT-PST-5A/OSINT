@@ -10,3 +10,6 @@
 [submodule "Pseudo/sherlock"]
 	path = Pseudo/sherlock
 	url = https://github.com/sherlock-project/sherlock.git
+[submodule "Email/holehe"]
+	path = Email/holehe
+	url = https://github.com/megadose/holehe.git
