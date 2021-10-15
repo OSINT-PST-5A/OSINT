@@ -12,7 +12,7 @@ def pseudoChoiced():
 		os.system('twint -u' + QueryPseudo)
 	elif QueryApplication == "sherlock":
 		os.chdir(QueryApplication)
-		os.system('python3 sherlock.py ' + QueryPseudo + ' --timeout 10')
+		os.system('python3 sherlock.py ' + QueryPseudo + ' --timeout 1')
 		os.system('cd ../')
 	elif QueryApplication == "nexfil":		
 		os.system('python3 nexfil.py -u ' + QueryPseudo)
@@ -57,7 +57,15 @@ def commentaireChoiced():
 
 def informationRetrieved():
 	os.system('clear')
-	print("0 : Exit\n1 : Pseudo\n2 : Email\n3 : Commentaire\n")
+	print("  /$$$$$$   /$$$$$$  /$$$$$$ /$$   /$$ /$$$$$$$$")
+	print(" /$$__  $$ /$$__  $$|_  $$_/| $$$ | $$|__  $$__/")
+	print("| $$  \ $$| $$  \__/  | $$  | $$$$| $$   | $$   ")
+	print("| $$  | $$|  $$$$$$   | $$  | $$ $$ $$   | $$")   
+	print("| $$  | $$ \____  $$  | $$  | $$  $$$$   | $$   ")
+	print("| $$  | $$ /$$  \ $$  | $$  | $$\  $$$   | $$   ")
+	print("|  $$$$$$/|  $$$$$$/ /$$$$$$| $$ \  $$   | $$   ")
+	print(" \______/  \______/ |______/|__/  \__/   |__/  ")
+	print("\n0 : Exit\n1 : Pseudo\n2 : Email\n3 : Commentaire\n")
 	Query=int(input("Choissisez un chiffre : "))
 	if Query == 0:
 		exit()
@@ -67,7 +75,6 @@ def informationRetrieved():
 		emailChoiced()
 	elif Query == 3:	
 		commentaireChoiced()
-
 
 
 
