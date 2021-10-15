@@ -11,6 +11,7 @@ réalisé par PIGA Alexandre et KANAWATI Rayan
 ## Prérequis
 
  * python3
+ * pip3
 
 ## Installation 
 
