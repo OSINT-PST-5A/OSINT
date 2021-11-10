@@ -13,11 +13,11 @@ def pseudoChoiced():
 		os.system('twint -u' + QueryPseudo)
 	elif QueryApplication == "sherlock":
 		os.chdir(QueryApplication)
-		os.system('python3 sherlock.py ' + QueryPseudo + ' --timeout 1 --output ' +  cwd +'/.Ressource/sherlock_'+QueryPseudo+'.txt')
+		os.system('python3 sherlock.py ' + QueryPseudo + ' --timeout 1 --output ' +  cwd +'/.Resultats/Profiles/sherlock_'+QueryPseudo+'.txt')
 		os.system('cd ../')
 	elif QueryApplication == "nexfil":		
 		os.system('python3 nexfil.py -u ' + QueryPseudo )
-		os.system('mv '+ home + '/.local/share/nexfil/dumps/* '+ cwd +'/.Ressource/nexfil_'+QueryPseudo+'.txt' )
+		os.system('mv '+ home + '/.local/share/nexfil/dumps/* '+ cwd +'/.Resultats/Profiles/nexfil_'+QueryPseudo+'.txt' )
 
 	elif QueryApplication == "instagram-scraper":
 		os.system('instagram-scraper ' + QueryPseudo)
@@ -36,10 +36,10 @@ def emailChoiced():
 	QueryApplication=input("Choissisez votre application : ")
 	if QueryApplication == "holehe":
 		os.chdir(QueryApplication)
-		os.system('holehe ' + QueryEmail+  ' --only-used --no-color >> '+  cwd +'/.Ressource/holehe_'+QueryEmail+'.txt' )
+		os.system('holehe ' + QueryEmail+  ' --only-used --no-color >> '+  cwd +'/.Resultats/Profiles/holehe_'+QueryEmail+'.txt' )
 	if QueryApplication == "h8mail":
 		os.chdir(QueryApplication)
-		os.system('h8mail -o '+ cwd +'/.Ressource/h8mail_'+QueryEmail+'.txt -t '+ QueryEmail)
+		os.system('h8mail -o '+ cwd +'/.Resultats/Profiles/h8mail_'+QueryEmail+'.txt -t '+ QueryEmail)
 	Query=input("Appuyer sur entrée pour retourné au menu")
 	os.chdir(cwd)
 	informationRetrieved()
