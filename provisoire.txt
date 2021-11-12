@@ -1,6 +1,0 @@
-4 fonctions
-
-création du templates avec le nom du pseudo (pseudo) 
-récupérer les liens du txt lié au pseudo (pseudo, lien en entré, balise ou écire ?)
-récupérer des photo a partir d'un pseudo (pseudo, image , balise ou écire)
-récupérer les site où le mail est utilisé ( mail, lien, balise ou écire)  

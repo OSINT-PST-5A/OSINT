@@ -5,6 +5,7 @@ from lxml import etree
 
 def copytemplate(profilPath,templatePath,profilName):
 	os.system('cp '+ templatePath + '/template.html ' + profilPath +'/'+ profilName+'.html' )
+	print(profilPath +"           " + profilName)
 
 def fillDocument(profilPath, profilName):
 	#list = os.system('ls -p '+profilPath+' | grep -v /')
@@ -15,7 +16,7 @@ def fillDocument(profilPath, profilName):
 		for j in temporaryList:
 			linkslist.append(j)
 	print(linkslist)
-	fillLink(linkslist,profilPath+"/"+profilName+'.html')
+	fillLink(linkslist,profilPath+'/'+profilName+'.html')
 
 		
 def getLink(fileName,profilPath):
@@ -36,8 +37,9 @@ def getLink(fileName,profilPath):
 	
 	return new_list
 
-def fillLink(linksList, fileName):
-	print("ouech")	
+def fillLink(linksList, fileName):	
+	os.system('pwd')
+	print(fileName)
 	file = open(fileName, "w")
 	file.seek(0,2)
 	file.write("<h1>Pseudo</h1> <br>")
@@ -57,11 +59,15 @@ def fillLink(linksList, fileName):
 
 def main(profilPath,templatePath,profilName):
 
+	print(profilPath +"\n")
+	print(templatePath + "\n")
+	print(profilName +"\n")
+
 	copytemplate(profilPath,templatePath,profilName)
 	fillDocument(profilPath,profilName)
 
 if __name__ == "__main__":
-	profilPath = '/mnt/d/ESIEA/5A/PST/OSINT/.Resultats/Profiles'
-	templatePath = '/mnt/d/ESIEA/5A/PST/OSINT/.Ressource/Templates'
-	profilName = 'ragzdazdazogoa'
+	#profilPath = '/mnt/d/ESIEA/5A/PST/OSINT/.Resultats/Profiles'
+	#templatePath = '/mnt/d/ESIEA/5A/PST/OSINT/.Ressource/Templates'
+	#profilName = 'ragzdazdazogoa'
 	main(profilPath,templatePath,profilName)
