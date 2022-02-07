@@ -18,15 +18,24 @@ def pseudoMenu():
 	showMenu("logo.txt", list)
 	QueryApplication=chooseMenuOption(len(list))
 	if  QueryApplication == 0:
-		os.system('instagram-scraper ' + queryPseudo)
-	elif QueryApplication == 1 :	
+		os.chdir('Pseudo/')
+		os.system('python3 facebook-Scraper.py ' + queryPseudo)
+		os.chdir(cwd)		
+	elif QueryApplication == 1 :
+		os.system('instagram-scraper ' + queryPseudo)			
+	elif QueryApplication == 2:
+		os.chdir('Pseudo/')
+		os.system('python3 myAnimeList-Script.py ' + queryPseudo)
+		os.chdir(cwd)
+			
+	elif QueryApplication == 3:
 		os.chdir('Pseudo/nexfil/')	
 		os.system('python3 nexfil.py -u ' + queryPseudo )
 		os.system('mv '+ home + '/.local/share/nexfil/dumps/* '+ cwd + pathResult +'nexfil_'+queryPseudo+'.txt' )
-		os.chdir(cwd)
-	elif QueryApplication == 2:
-		os.system('python3 Pseudo/sherlock/sherlock/sherlock.py ' + queryPseudo + ' --timeout 1 --output ' +  cwd + pathResult + 'sherlock_'+queryPseudo+'.txt')	
-	elif QueryApplication == 3:
+		os.chdir(cwd)		
+	elif QueryApplication == 4:
+		os.system('python3 Pseudo/sherlock/sherlock/sherlock.py ' + queryPseudo + ' --timeout 1 --output ' +  cwd + pathResult + 'sherlock_'+queryPseudo+'.txt')
+	elif QueryApplication == 5:
 		os.system('twint -u' + queryPseudo)
 	Query=input("Appuyer sur entrée pour retourné au menu")
 	mainMenu()
