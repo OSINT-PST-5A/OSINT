@@ -25,7 +25,8 @@ def pseudoMenu():
 		os.system('instagram-scraper ' + queryPseudo)			
 	elif QueryApplication == 2:
 		os.chdir('Pseudo/')
-		os.system('python3 myAnimeList-Script.py ' + queryPseudo)
+		print("python3 myAnimeList-Script.py " + queryPseudo + ' ' + sys.argv[1])
+		os.system('python3 myAnimeList-Script.py ' + queryPseudo + ' ' + sys.argv[1] )
 		os.chdir(cwd)
 			
 	elif QueryApplication == 3:
