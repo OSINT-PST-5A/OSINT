@@ -73,7 +73,7 @@ for anime in allAnime:
         onHold.append(anime)
 
 
-file = open(sys.argv[1] + "_myAnimeList.json", "w")
+file = open("myAnimeList_" + sys.argv[1] + ".json", "w")
 #Conversion des lists au format json et écriture du fichier json
 file.write(
     "{\"Watching\":" + json.dumps([ob.__dict__ for ob in watching]) +

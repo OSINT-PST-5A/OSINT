@@ -5,7 +5,6 @@ from lxml import etree
 
 def copytemplate(profilPath,templatePath,profilName):
 	os.system('cp '+ templatePath + '/template.html ' + profilPath +'/'+ profilName+'.html' )
-	print(profilPath +"           " + profilName)
 
 def fillDocument(profilPath, profilName):
 	#list = os.system('ls -p '+profilPath+' | grep -v /')
@@ -58,10 +57,6 @@ def fillLink(linksList, fileName):
 	#todo rajouté la liste dans le fichier html
 
 def main(profilPath,templatePath,profilName):
-
-	print(profilPath +"\n")
-	print(templatePath + "\n")
-	print(profilName +"\n")
 
 	copytemplate(profilPath,templatePath,profilName)
 	fillDocument(profilPath,profilName)

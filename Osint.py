@@ -5,7 +5,8 @@ sys.path.append('.Ressource/Scripts/')
 import Profil_Generator
 
 
-pathResult = '/.Resultats/Profiles/'
+pathResult = '/.Resultats/'
+pathProfilResult = pathResult + 'Profiles/'
 pathTemplate =  '/.Ressource/Templates'
 cwd = os.getcwd()
 home = os.getenv('HOME')
@@ -14,7 +15,7 @@ def pseudoMenu():
 	
 	
 	queryPseudo=input("Choissisez un Pseudo : ")
-	list = [a for a in os.listdir('Pseudo') ]
+	list = [a for a in sorted(os.listdir('Pseudo')) ]
 	showMenu("logo.txt", list)
 	QueryApplication=chooseMenuOption(len(list))
 	if  QueryApplication == 0:
@@ -25,8 +26,8 @@ def pseudoMenu():
 		os.system('instagram-scraper ' + queryPseudo)			
 	elif QueryApplication == 2:
 		os.chdir('Pseudo/')
-		print("python3 myAnimeList-Script.py " + queryPseudo + ' ' + sys.argv[1])
-		os.system('python3 myAnimeList-Script.py ' + queryPseudo + ' ' + sys.argv[1] )
+		os.system('python3 myAnimeList-Script.py ' + queryPseudo + ' ' + sys.argv[1])
+		os.system('mv ./myAnimeList_' + queryPseudo +".json " + cwd + pathResult +'myAnimeList_'+queryPseudo+'.json' )
 		os.chdir(cwd)
 			
 	elif QueryApplication == 3:
@@ -44,7 +45,7 @@ def pseudoMenu():
 def emailMenu():
 	
 	queryEmail=input("Choissisez un Email : ")
-	list = [a for a in os.listdir('Email') ]
+	list = [a for a in sorted(os.listdir('Email'))]
 	showMenu("logo.txt", list)
 	QueryApplication=chooseMenuOption(len(list))
 	if QueryApplication == 0:
@@ -59,7 +60,7 @@ def emailMenu():
 def commentaireMenu():
 	
 
-	list = [a for a in os.listdir('Commentaire') ]
+	list = [a for a in sorted(os.listdir('Commentaire')) ]
 	showMenu("logo.txt", list)
 	QueryApplication=chooseMenuOption(len(list))
 	if QueryApplication == 0:
@@ -71,17 +72,25 @@ def automaticMenu():
 	queryPseudo=input("Choissisez un Pseudo : ")
 	queryEmail=input("Choissisez un Email : ")
 	folderName = queryPseudo + '_' + queryEmail
-	folderGeneration(pathResult, folderName)	
-	os.system('python3 Pseudo/sherlock/sherlock/sherlock.py ' + queryPseudo + ' --timeout 1 --output ' +  cwd + pathResult +folderName+ '/sherlock_'+queryPseudo+'.txt')	
-	os.system('h8mail -o '+ cwd + pathResult+folderName+'/h8mail_'+queryEmail+'.txt -t '+ queryEmail)
-	os.system('holehe ' + queryEmail+  ' --only-used --no-color >> '+  cwd + pathResult+folderName+ '/holehe_'+queryEmail+'.txt' )
+	folderGeneration(pathProfilResult, folderName)	
+	os.system('python3 Pseudo/sherlock/sherlock/sherlock.py ' + queryPseudo + ' --timeout 1 --output ' +  cwd + pathProfilResult +folderName+ '/sherlock_'+queryPseudo+'.txt')	
+	os.system('h8mail -o '+ cwd + pathProfilResult+folderName+'/h8mail_'+queryEmail+'.txt -t '+ queryEmail)
+	os.system('holehe ' + queryEmail+  ' --only-used --no-color >> '+  cwd + pathProfilResult+folderName+ '/holehe_'+queryEmail+'.txt' )
 	os.chdir('Pseudo/nexfil/')	
 	os.system('python3 nexfil.py -u ' + queryPseudo )
-	os.system('mv '+ home + '/.local/share/nexfil/dumps/* '+ cwd + pathResult+ folderName +'/nexfil_'+queryPseudo+'.txt' )
+	os.system('mv '+ home + '/.local/share/nexfil/dumps/* '+ cwd + pathProfilResult+ folderName +'/nexfil_'+queryPseudo+'.txt' )
 	os.chdir(cwd)
-	print( cwd +"  pathResult  " + pathResult + "folderName" + folderName)
 
-	Profil_Generator.main(cwd+pathResult+folderName,cwd+pathTemplate,folderName)
+
+	nexfilFile = open(cwd + pathProfilResult + folderName +"/nexfil_" + queryPseudo + ".txt", "r")
+	sherlockFile = open(cwd + pathProfilResult + folderName + "/sherlock_" + queryPseudo + ".txt", "r")
+
+	if ( ('https://myanimelist.net/profile/moumous95' in nexfilFile.read()) or 'https://myanimelist.net/profile/moumous95' in sherlockFile.read()):
+		os.system("python3 ./Pseudo/myAnimeList-Script.py " + queryPseudo + " " + sys.argv[1])
+		print("myAnimeList_Script Job is done")
+		os.system("mv myAnimeList_" + queryPseudo +".json " + cwd + pathProfilResult+ folderName)
+
+	Profil_Generator.main(cwd+pathProfilResult+folderName,cwd+pathTemplate,folderName)
 
 
 def folderGeneration(path, folderName):
@@ -115,7 +124,8 @@ def chooseMenuOption(max):
 
 def mainMenu():
 	os.system('clear')
-	list = [a for a in os.listdir() if (os.path.isdir(a) and not a.startswith("."))]
+	list = [a for a in sorted(os.listdir()) if (os.path.isdir(a) and not a.startswith("."))]
+	print(list)
 	list.insert(0,"Exit")
 	list.insert(4,"Automatic")
 	showMenu("logo.txt", list)

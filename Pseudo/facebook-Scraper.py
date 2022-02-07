@@ -9,6 +9,14 @@ import os
 import wget
 import time
 import uuid
+import getpass
+
+#Email, mdp, cible
+print(os.getcwd())
+
+#Get user informations from terminal
+facebook_id=input("Veuillez insérer votre identifiant facebook : ")
+facebook_password=getpass.getpass(prompt="Veuillez insérer votre mot de passe facebook : ")
 
 #Path to the chrome driver
 CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
@@ -33,9 +41,9 @@ password = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SE
 
 #Enter the logs into the website
 username.clear()
-username.send_keys(sys.argv[1])
+username.send_keys(facebook_id)
 password.clear()
-password.send_keys(sys.argv[2])
+password.send_keys(facebook_password)
 
 #Simulate the login button click
 logginButton=WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
@@ -47,8 +55,8 @@ time.sleep(5)
 
 #https://www.facebook.com/flash.flash.5496/photos_of
 images = []
-for i in ['photos_of', 'photos_all', 'photos_by']:
-    driver.get("https://www.facebook.com/" + sys.argv[3] + "/" + i + "/")
+for i in ['photos_by']:
+    driver.get("https://www.facebook.com/" + sys.argv[1] + "/" + i + "/")
     time.sleep(5)
 
     n_scrolls = 2
@@ -67,7 +75,7 @@ for i in ['photos_of', 'photos_all', 'photos_by']:
             images.append(img[0].get_attribute("src"))
 
 path = os.getcwd()
-path = os.path.join(path, sys.argv[3] + "_" + uuid.uuid4().hex)
+path = os.path.join(path, "../.Resultats/facebook_scraper_" + sys.argv[1])
 #create the directory
 os.mkdir(path)
 
