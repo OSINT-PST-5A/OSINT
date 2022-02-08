@@ -64,6 +64,11 @@ a:hover {
   margin: 100px 0;
 }
 
+.middle-container img {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
 .skill-row {
   width: 50%;
   margin: 100px auto 100px auto;

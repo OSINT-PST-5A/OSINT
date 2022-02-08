@@ -12,7 +12,7 @@ def copytemplate(profilPath,templatePath,profilName):
 
 def fillDocument(profilPath, profilName):
 	#Lister tous les fichiers du profil qui n'ont pas pour extension .html
-	filelist = [a for a in os.listdir(profilPath) if not os.path.isdir(a)  and not a.endswith(".html")]
+	filelist = [a for a in os.listdir(profilPath) if not os.path.isdir(os.path.join(profilPath, a))  and not a.endswith(".html")]
 	dictionary = {} 
 	#Pour chaque fichier dans le dossier profil:
 	# - on récupère son contenu
@@ -39,11 +39,21 @@ def fillDocument(profilPath, profilName):
 		else:
 			dictionary[dictionaryKey] = temporaryList
 
+	#Récupération des images
+	temporaryList = []
+	directoryList = [directory for directory in os.listdir(profilPath) if os.path.isdir(os.path.join(profilPath, directory))]
+	for directory in directoryList:
+		if "facebook_scraper" in directory:
+			for photo in os.listdir(profilPath + "/" + directory):
+				temporaryList.append(profilPath + "/" +directory + "/" +photo)
+	dictionary["photos"] = temporaryList
+
 	fillWebPageContent(dictionary,profilPath+'/'+profilName+'.html', profilName)
+
 
 		
 def getFileContent(fileName,profilPath):
-	
+
 	file = open(profilPath+'/'+fileName, "r")
 	linksList = []
 	new_list = [] 
@@ -75,9 +85,10 @@ def fillWebPageContent(filesContent, fileName, profilName):
 	jsonString = ''.join(filesContent["animeList"])
 	file.write(json2html.convert(json = jason.loads(jsonString)))
 	#else:
-	file.write("Not found")
+	#file.write("Not found")
 	file.write("</p></div><div class=\"skill-row\"><h3>photos</h3><p class=\"java-skill-description\">")
-	file.write("TO REPLACE BY PHOTOS")
+	for image in filesContent["photos"]:
+		file.write("<img src=\"" + image + "\">")
 	file.write("</p></div><div class=\"skill-row\"><h3>Où le pseudo est-il utilisé ?</h3><p class=\"java-skill-description\">")
 	for content in filesContent["links"] :
 		file.write(content + "<br>")

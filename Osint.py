@@ -3,6 +3,7 @@ import glob
 import sys
 sys.path.append('.Ressource/Scripts/')
 import Profil_Generator
+import getpass
 
 #Global variables
 pathResult = '/.Resultats/'
@@ -56,7 +57,7 @@ def pseudoMenu():
 	QueryApplication=chooseMenuOption(len(list))
 	if  QueryApplication == 0:
 		os.chdir('Pseudo/')
-		os.system('python3 facebook-Scraper.py ' + queryPseudo)
+		os.system('python3 facebook-Scraper.py ' + queryPseudo + " " + cwd + pathResult + '/facebook_scraper_'+queryPseudo)
 		os.chdir(cwd)		
 	elif QueryApplication == 1 :
 		os.system('instagram-scraper ' + queryPseudo)			
@@ -119,13 +120,17 @@ def commentaireMenu():
 def automaticMenu():
 	queryPseudo=input("Choissisez un Pseudo : ")
 	queryEmail=input("Choissisez un Email : ")
-	"""queryUserWill=input("Souhaitez récupérer les photos d'un compte Facebook lié à la personne ? (Si oui vous devrez entrer les identifiants de votre compte pour que la récupération s'opère) - y/n")
-
-	if queryUserWill == 'y':"""
-
-
+	queryUserWill=input("Souhaitez récupérer les photos d'un compte Facebook lié à la personne ? (Si oui vous devrez entrer les identifiants de votre compte pour que la récupération s'opère) - y/n : ")
 	folderName = queryPseudo + '_' + queryEmail
-	folderGeneration(pathProfilResult, folderName)	
+	"""folderGeneration(pathProfilResult, folderName)
+
+	if queryUserWill == 'y':
+		queryUserTargeted=input("Donner le nom de l'utilisateur inscrit dans l'url : ")
+		queryPseudoLog=input("Veuillez donner votre identifiant de connexion (mail/téléphone) : ")
+		queryPasswordLog=getpass.getpass(prompt="Veuillez insérer votre mot de passe facebook : ")
+		os.system('python3 Pseudo/facebook-Scraper.py ' + queryUserTargeted + " " + cwd + pathProfilResult +folderName+ '/facebook_scraper_'+queryPseudo + " " + queryPseudoLog + " " + queryPasswordLog)
+
+		
 	os.system('python3 Pseudo/sherlock/sherlock/sherlock.py ' + queryPseudo + ' --timeout 1 --output ' +  cwd + pathProfilResult +folderName+ '/sherlock_'+queryPseudo+'.txt')	
 	os.system('h8mail -o '+ cwd + pathProfilResult+folderName+'/h8mail_'+queryEmail+'.txt -t '+ queryEmail)
 	os.system('holehe ' + queryEmail+  ' --only-used --no-color >> '+  cwd + pathProfilResult+folderName+ '/holehe_'+queryEmail+'.txt' )
@@ -147,7 +152,7 @@ def automaticMenu():
 		print("Lancement du script myAnimeList !")
 		os.system("python3 ./Pseudo/myAnimeList-Script.py " + queryPseudo + " " + sys.argv[1])
 		print("Le script myAnimeList a fini son travail avec succès !")
-		os.system("mv myAnimeList_" + queryPseudo +".json " + cwd + pathProfilResult+ folderName)
+		os.system("mv myAnimeList_" + queryPseudo +".json " + cwd + pathProfilResult+ folderName)"""
 
 	Profil_Generator.main(cwd+pathProfilResult+folderName,cwd+pathTemplate,folderName)
 

@@ -2,6 +2,7 @@ import sys
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,21 +11,25 @@ import wget
 import time
 import getpass
 
+#Arg1: Cible, arg2: pathToDownloadedPhotos, arg3: id_connexion, arg4: mdp_connexion
+
 #Email, mdp, cible
 print(os.getcwd())
 
 #Get user informations
-"""nbArgument = len(sys.argv)
-if nbArgument == 1:
+nbArgument = len(sys.argv)
+if nbArgument == 3: 
+    facebook_user_targeted=sys.argv[1]
     facebook_id=input("Veuillez insérer votre identifiant facebook : ")
     facebook_password=getpass.getpass(prompt="Veuillez insérer votre mot de passe facebook : ")
-else if nbArgument == 4:
-    facebook_id=sys.argv[2]
-    facebook_password=sys.argv[3]
+elif nbArgument == 5:
+    facebook_user_targeted=sys.argv[1]
+    facebook_id=sys.argv[3]
+    facebook_password=sys.argv[4]
 else:
-    sys.exit()"""
-facebook_id=input("Veuillez insérer votre identifiant facebook : ")
-facebook_password=getpass.getpass(prompt="Veuillez insérer votre mot de passe facebook : ")
+    sys.exit()
+
+pathToDownloadedPhotos=sys.argv[2]
 
 #Path to the chrome driver
 CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
@@ -35,7 +40,8 @@ chrome_options.add_experimental_option("prefs", prefs)
 chrome_options.add_argument("--headless")
 
 #activate chromedriver
-driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+chromeService = Service(CHROMEDRIVER_PATH)
+driver = webdriver.Chrome(service=chromeService, options=chrome_options)
 
 #Open the target webpage
 driver.get("http://fr-fr.facebook.com")
@@ -64,7 +70,7 @@ time.sleep(5)
 #https://www.facebook.com/flash.flash.5496/photos_of
 images = []
 for i in ['photos_by']:
-    driver.get("https://www.facebook.com/" + sys.argv[1] + "/" + i + "/")
+    driver.get("https://www.facebook.com/" + facebook_user_targeted + "/" + i + "/")
     time.sleep(5)
 
     n_scrolls = 2
@@ -82,17 +88,13 @@ for i in ['photos_by']:
             img = driver.find_elements_by_tag_name("img")
             images.append(img[0].get_attribute("src"))
 
-path = os.getcwd()
-path = os.path.join(path, "../.Resultats/facebook_scraper_" + sys.argv[1])
 #create the directory
-os.mkdir(path)
-
-
+os.mkdir(pathToDownloadedPhotos)
 
 counter=0
 for image in images:
-    save_as = os.path.join(path, str(counter) + '.png')
+    save_as = os.path.join(pathToDownloadedPhotos, str(counter) + '.png')
     wget.download(image, save_as)
     counter += 1
 
-print("Images saved in " + path)
+print("Images saved in " + pathToDownloadedPhotos)
