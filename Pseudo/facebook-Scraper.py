@@ -8,13 +8,21 @@ from selenium.webdriver.support.wait import WebDriverWait
 import os
 import wget
 import time
-import uuid
 import getpass
 
 #Email, mdp, cible
 print(os.getcwd())
 
-#Get user informations from terminal
+#Get user informations
+"""nbArgument = len(sys.argv)
+if nbArgument == 1:
+    facebook_id=input("Veuillez insérer votre identifiant facebook : ")
+    facebook_password=getpass.getpass(prompt="Veuillez insérer votre mot de passe facebook : ")
+else if nbArgument == 4:
+    facebook_id=sys.argv[2]
+    facebook_password=sys.argv[3]
+else:
+    sys.exit()"""
 facebook_id=input("Veuillez insérer votre identifiant facebook : ")
 facebook_password=getpass.getpass(prompt="Veuillez insérer votre mot de passe facebook : ")
 

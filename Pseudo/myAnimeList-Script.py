@@ -85,6 +85,7 @@ file.write(
 )
 file.close()
 
+
 """animeLists = []
 animeLists.append(watching)
 animeLists.append(completed)

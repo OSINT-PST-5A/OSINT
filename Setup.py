@@ -5,6 +5,8 @@ os.system('apt upgrade')
 os.system('apt-get install -y python3-pip')
 os.system('git submodule update --init --recursive')
 os.system('pip3 install h8mail')
+os.system('h8mail -g')
+os.system('mv h8mail_config.ini ./Email/h8mail/')
 os.system('pip3 install wget')
 #Requirements installation
 root = os.path.join('..', 'OSINT')

@@ -4,15 +4,51 @@ import sys
 sys.path.append('.Ressource/Scripts/')
 import Profil_Generator
 
-
+#Global variables
 pathResult = '/.Resultats/'
 pathProfilResult = pathResult + 'Profiles/'
 pathTemplate =  '/.Ressource/Templates'
 cwd = os.getcwd()
 home = os.getenv('HOME')
 
+
+def deleteUnnecessaryDataFromFile(completeFilePath, programName):
+
+	#On ouvre le fichier pour récupérer 
+	file = open(completeFilePath, "r")
+	lines = file.readlines()
+	file = open(completeFilePath, "w")
+	#sherlock
+	if (programName == "sherlock"):
+		for line in lines:
+			if line != lines[-1]:
+				file.write(line)
+	#nexfil
+	if (programName == "nexfil"):
+		for line in lines:
+			if line.startswith('http'):
+				file.write(line)
+	#holehe
+	if (programName == "holehe"):
+		for line in lines:
+			if line.startswith('[+]') and "Email used" not in line:
+				file.write(line.replace("[+] ", ""))
+	file.close()
+	#h8mail
+	if (programName == "h8mail"):
+		if len(lines) == 1:
+			print("Fichier h8mail vide, il va donc être supprimé")
+			os.system("rm " + completeFilePath)
+		for line in lines:
+			if line != lines[0]:
+				file.write(line)
+
+
+
+
+
+
 def pseudoMenu():
-	
 	
 	queryPseudo=input("Choissisez un Pseudo : ")
 	list = [a for a in sorted(os.listdir('Pseudo')) ]
@@ -34,13 +70,17 @@ def pseudoMenu():
 		os.chdir('Pseudo/nexfil/')	
 		os.system('python3 nexfil.py -u ' + queryPseudo )
 		os.system('mv '+ home + '/.local/share/nexfil/dumps/* '+ cwd + pathResult +'nexfil_'+queryPseudo+'.txt' )
+		deleteUnnecessaryDataFromFile(cwd + pathResult +'nexfil_'+queryPseudo+'.txt', "nexfil")
 		os.chdir(cwd)		
 	elif QueryApplication == 4:
 		os.system('python3 Pseudo/sherlock/sherlock/sherlock.py ' + queryPseudo + ' --timeout 1 --output ' +  cwd + pathResult + 'sherlock_'+queryPseudo+'.txt')
+		deleteUnnecessaryDataFromFile(cwd + pathResult + 'sherlock_'+queryPseudo+'.txt', "sherlock")
 	elif QueryApplication == 5:
 		os.system('twint -u' + queryPseudo)
 	Query=input("Appuyer sur entrée pour retourné au menu")
 	mainMenu()
+
+
 
 def emailMenu():
 	
@@ -50,16 +90,21 @@ def emailMenu():
 	QueryApplication=chooseMenuOption(len(list))
 	if QueryApplication == 0:
 		os.system('h8mail -o '+ cwd + pathResult+'h8mail_'+queryEmail+'.txt -t '+ queryEmail)
+		deleteUnnecessaryDataFromFile(cwd + pathResult+'h8mail_'+queryEmail+'.txt', "h8mail")
 	elif QueryApplication == 1:
 		os.system('holehe ' + queryEmail+  ' --only-used --no-color >> '+  cwd + pathResult + 'holehe_'+queryEmail+'.txt' )
+		deleteUnnecessaryDataFromFile(cwd + pathResult + 'holehe_'+queryEmail+'.txt', "holehe")
+
 
 	Query=input("Appuyer sur entrée pour retourné au menu")
 	mainMenu()
 
 
+
+
+
 def commentaireMenu():
 	
-
 	list = [a for a in sorted(os.listdir('Commentaire')) ]
 	showMenu("logo.txt", list)
 	QueryApplication=chooseMenuOption(len(list))
@@ -68,9 +113,17 @@ def commentaireMenu():
 	Query=input("Appuyer sur entrée pour retourné au menu")
 	mainMenu()
 
+
+
+
 def automaticMenu():
 	queryPseudo=input("Choissisez un Pseudo : ")
 	queryEmail=input("Choissisez un Email : ")
+	"""queryUserWill=input("Souhaitez récupérer les photos d'un compte Facebook lié à la personne ? (Si oui vous devrez entrer les identifiants de votre compte pour que la récupération s'opère) - y/n")
+
+	if queryUserWill == 'y':"""
+
+
 	folderName = queryPseudo + '_' + queryEmail
 	folderGeneration(pathProfilResult, folderName)	
 	os.system('python3 Pseudo/sherlock/sherlock/sherlock.py ' + queryPseudo + ' --timeout 1 --output ' +  cwd + pathProfilResult +folderName+ '/sherlock_'+queryPseudo+'.txt')	
@@ -80,14 +133,20 @@ def automaticMenu():
 	os.system('python3 nexfil.py -u ' + queryPseudo )
 	os.system('mv '+ home + '/.local/share/nexfil/dumps/* '+ cwd + pathProfilResult+ folderName +'/nexfil_'+queryPseudo+'.txt' )
 	os.chdir(cwd)
-
+	
+	#Delete uncessary data
+	deleteUnnecessaryDataFromFile(cwd + pathProfilResult +folderName+ '/sherlock_'+queryPseudo+'.txt', "sherlock")
+	deleteUnnecessaryDataFromFile(cwd + pathProfilResult+ folderName +'/nexfil_'+queryPseudo+'.txt', "nexfil")
+	deleteUnnecessaryDataFromFile(cwd + pathProfilResult+folderName+ '/holehe_'+queryEmail+'.txt', "holehe")
+	deleteUnnecessaryDataFromFile(cwd + pathProfilResult+folderName+'/h8mail_'+queryEmail+'.txt', "h8mail")
 
 	nexfilFile = open(cwd + pathProfilResult + folderName +"/nexfil_" + queryPseudo + ".txt", "r")
 	sherlockFile = open(cwd + pathProfilResult + folderName + "/sherlock_" + queryPseudo + ".txt", "r")
 
-	if ( ('https://myanimelist.net/profile/moumous95' in nexfilFile.read()) or 'https://myanimelist.net/profile/moumous95' in sherlockFile.read()):
+	if ( ('https://myanimelist.net/profile/' + queryPseudo in nexfilFile.read()) or 'https://myanimelist.net/profile/' + queryPseudo in sherlockFile.read()):
+		print("Lancement du script myAnimeList !")
 		os.system("python3 ./Pseudo/myAnimeList-Script.py " + queryPseudo + " " + sys.argv[1])
-		print("myAnimeList_Script Job is done")
+		print("Le script myAnimeList a fini son travail avec succès !")
 		os.system("mv myAnimeList_" + queryPseudo +".json " + cwd + pathProfilResult+ folderName)
 
 	Profil_Generator.main(cwd+pathProfilResult+folderName,cwd+pathTemplate,folderName)
