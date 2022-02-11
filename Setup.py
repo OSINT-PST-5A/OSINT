@@ -8,6 +8,7 @@ os.system('pip3 install h8mail')
 os.system('h8mail -g')
 os.system('mv h8mail_config.ini ./Email/h8mail/')
 os.system('pip3 install wget')
+os.system('sudo pip install json2html')
 #Requirements installation
 root = os.path.join('..', 'OSINT')
 path = os.getcwd()
