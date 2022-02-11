@@ -193,7 +193,7 @@ def mainMenu():
 	list = [a for a in sorted(os.listdir()) if (os.path.isdir(a) and not a.startswith("."))]
 	print(list)
 	list.insert(0,"Exit")
-	list.insert(5,"Automatic")
+	list.insert(5,"Automatique")
 	showMenu("logo.txt", list)
 	option=chooseMenuOption(len(list))
 	if option == 0:
