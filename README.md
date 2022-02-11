@@ -13,7 +13,8 @@ réalisé par PIGA Alexandre et KANAWATI Rayan
  * python3
  * pip3
  * Selenium
- * ChromeDriver
+ * Google Chrome
+ * ChromeDriver à l'emplacement /usr/bin/
  * BeautifulSoup
 
 ## Installation 
