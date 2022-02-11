@@ -16,3 +16,6 @@
 [submodule "Email/h8mail"]
 	path = Email/h8mail
 	url = https://github.com/khast3x/h8mail.git
+[submodule "Google-dorks/dorks-eye"]
+	path = Google-dorks/dorks-eye
+	url = https://github.com/BullsEye0/dorks-eye.git

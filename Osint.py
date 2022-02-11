@@ -100,10 +100,6 @@ def emailMenu():
 	Query=input("Appuyer sur entrée pour retourné au menu")
 	mainMenu()
 
-
-
-
-
 def commentaireMenu():
 	
 	list = [a for a in sorted(os.listdir('Commentaire')) ]
@@ -114,15 +110,21 @@ def commentaireMenu():
 	Query=input("Appuyer sur entrée pour retourné au menu")
 	mainMenu()
 
-
-
+def googleDorksMenu():
+	list = [a for a in sorted(os.listdir('Google-dorks')) ]
+	showMenu("logo.txt", list)
+	QueryApplication=chooseMenuOption(len(list))
+	if QueryApplication == 0:
+		os.system('python3 Google-dorks/dorks-eye/dorks-eye.py')
+	Query=input("Appuyer sur entrée pour retourné au menu")
+	mainMenu()
 
 def automaticMenu():
 	queryPseudo=input("Choissisez un Pseudo : ")
 	queryEmail=input("Choissisez un Email : ")
 	queryUserWill=input("Souhaitez récupérer les photos d'un compte Facebook lié à la personne ? (Si oui vous devrez entrer les identifiants de votre compte pour que la récupération s'opère) - y/n : ")
 	folderName = queryPseudo + '_' + queryEmail
-	"""folderGeneration(pathProfilResult, folderName)
+	folderGeneration(pathProfilResult, folderName)
 
 	if queryUserWill == 'y':
 		queryUserTargeted=input("Donner le nom de l'utilisateur inscrit dans l'url : ")
@@ -152,7 +154,7 @@ def automaticMenu():
 		print("Lancement du script myAnimeList !")
 		os.system("python3 ./Pseudo/myAnimeList-Script.py " + queryPseudo + " " + sys.argv[1])
 		print("Le script myAnimeList a fini son travail avec succès !")
-		os.system("mv myAnimeList_" + queryPseudo +".json " + cwd + pathProfilResult+ folderName)"""
+		os.system("mv myAnimeList_" + queryPseudo +".json " + cwd + pathProfilResult+ folderName)
 
 	Profil_Generator.main(cwd+pathProfilResult+folderName,cwd+pathTemplate,folderName)
 
@@ -191,7 +193,7 @@ def mainMenu():
 	list = [a for a in sorted(os.listdir()) if (os.path.isdir(a) and not a.startswith("."))]
 	print(list)
 	list.insert(0,"Exit")
-	list.insert(4,"Automatic")
+	list.insert(5,"Automatic")
 	showMenu("logo.txt", list)
 	option=chooseMenuOption(len(list))
 	if option == 0:
@@ -201,8 +203,10 @@ def mainMenu():
 	elif option == 2:	
 		emailMenu()
 	elif option == 3:
-		pseudoMenu()
+		googleDorksMenu()
 	elif option == 4:
+		pseudoMenu()	
+	elif option == 5:
 		automaticMenu()
 		
 
