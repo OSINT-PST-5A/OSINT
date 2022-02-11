@@ -20,7 +20,7 @@ class Anime:
 url = "https://myanimelist.net/animelist/" + sys.argv[1] + "?status=7"
 
 #Path to the chrome driver
-CHROMEDRIVER_PATH = sys.argv[2]
+CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
 #Options to hide chrome
 chrome_options = Options()
 prefs = {"profile.default_content_setting_values.notifications" : 2}

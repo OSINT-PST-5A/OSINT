@@ -63,7 +63,7 @@ def pseudoMenu():
 		os.system('instagram-scraper ' + queryPseudo)			
 	elif QueryApplication == 2:
 		os.chdir('Pseudo/')
-		os.system('python3 myAnimeList-Script.py ' + queryPseudo + ' ' + sys.argv[1])
+		os.system('python3 myAnimeList-Script.py ' + queryPseudo)
 		os.system('mv ./myAnimeList_' + queryPseudo +".json " + cwd + pathResult +'myAnimeList_'+queryPseudo+'.json' )
 		os.chdir(cwd)
 			
@@ -152,7 +152,7 @@ def automaticMenu():
 
 	if ( ('https://myanimelist.net/profile/' + queryPseudo in nexfilFile.read()) or 'https://myanimelist.net/profile/' + queryPseudo in sherlockFile.read()):
 		print("Lancement du script myAnimeList !")
-		os.system("python3 ./Pseudo/myAnimeList-Script.py " + queryPseudo + " " + sys.argv[1])
+		os.system("python3 ./Pseudo/myAnimeList-Script.py " + queryPseudo)
 		print("Le script myAnimeList a fini son travail avec succès !")
 		os.system("mv myAnimeList_" + queryPseudo +".json " + cwd + pathProfilResult+ folderName)
 
