@@ -12,6 +12,9 @@ réalisé par PIGA Alexandre et KANAWATI Rayan
 
  * python3
  * pip3
+ * Selenium
+ * ChromeDriver
+ * BeautifulSoup
 
 ## Installation 
 
